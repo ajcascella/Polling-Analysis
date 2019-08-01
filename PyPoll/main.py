@@ -16,37 +16,37 @@ with open(csvpath, 'r') as file_handler:
 totalvotes = len(voterid)
 print(totalvotes)
 
-uniquecandidate = []
+uniquecandidate = {}
 for x in candidate:
     if x not in uniquecandidate:
-        uniquecandidate.append(x)
+        uniquecandidate[x] = 1
+    else:
+        uniquecandidate[x] = uniquecandidate[x] + 1
 
 print(uniquecandidate)
 
-KhanTotal = 0
-CorreyTotal = 0
-LiTotal = 0
-OTooleyTotal = 0
+for x in uniquecandidate:
+    print('key: ' + x + ", value: " + str(uniquecandidate[x]))
 
-for i in candidate:
-    if i == "Khan":
-        KhanTotal = KhanTotal +1
-    elif i == "Correy":
-        CorreyTotal = CorreyTotal + 1
-    elif i == "Li":
-        LiTotal = LiTotal + 1
-    elif i == "O'Tooley":
-        OTooleyTotal = OTooleyTotal + 1
-print(KhanTotal, CorreyTotal, LiTotal, OTooleyTotal)
+uniquecandidate['Khan']
 
-KhanPercent = (KhanTotal/totalvotes)*100
-CorreyPercent = (CorreyTotal/totalvotes)*100
-LiPercent = (LiTotal/totalvotes)*100
-OTooleyPercent = (OTooleyTotal/totalvotes)*100
+KhanPercent = round((uniquecandidate["Khan"]/totalvotes)*100,2)
+CorreyPercent = round((uniquecandidate['Correy']/totalvotes)*100,2)
+LiPercent = round((uniquecandidate['Li']/totalvotes)*100,2)
+OTooleyPercent = round((uniquecandidate["O'Tooley"]/totalvotes)*100,2)
 
 print("Total Votes: "+ str(totalvotes))
-print("Khan: " +str(KhanPercent)+ "(" +str(KhanTotal) +")")
-print("Correy: "+ str(CorreyPercent)+ "(" +str(CorreyTotal) +")")
-print("Li: " + str(LiPercent)+ "(" +str(LiTotal) +")")
-print("O'Tooley: " + str(OTooleyPercent) + "(" +str(OTooleyTotal) +")")
-print("Winner: Khan")
+print("Khan: " +str(KhanPercent)+ "% " + "(" +str(uniquecandidate['Khan']) +")")
+print("Correy: "+ str(CorreyPercent)+"% " + "(" +str(uniquecandidate['Correy']) +")")
+print("Li: " + str(LiPercent)+ "% " +"(" +str(uniquecandidate['Li']) +")")
+print("O'Tooley: " + str(OTooleyPercent) + "% " +"(" +str(uniquecandidate["O'Tooley"]) +")")
+print("Winner: ")
+
+with open("poll_data.txt","w", newline="") as txtfile:
+    print("Total Votes: "+ str(totalvotes),file = txtfile)
+    print("Khan: " +str(KhanPercent)+ "% " + "(" +str(uniquecandidate['Khan']) +")",file = txtfile)
+    print("Correy: "+ str(CorreyPercent)+"% " + "(" +str(uniquecandidate['Correy']) +")",file = txtfile)
+    print("Li: " + str(LiPercent)+ "% " +"(" +str(uniquecandidate['Li']) +")",file = txtfile)
+    print("O'Tooley: " + str(OTooleyPercent) + "% " +"(" +str(uniquecandidate["O'Tooley"]) +")",file = txtfile)
+    print("Winner: ",file = txtfile)
+
