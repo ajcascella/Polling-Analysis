@@ -2,6 +2,7 @@ import os
 import csv
 
 csvpath = os.path.join("Resources","budget_data.csv")
+
 with open(csvpath, 'r') as file_handler:
     reader = csv.reader(file_handler)
     header = next(reader)
@@ -12,36 +13,51 @@ with open(csvpath, 'r') as file_handler:
         moneyList.append(row[1])
 
 totalmonths = (len(dateList))
-print(totalmonths)
+totalmonths
+
+moneyList
 
 for i in range(0, len(moneyList)):
     moneyList[i] = int(moneyList[i])
 
 nettotal = sum(moneyList)
-print(nettotal)
+nettotal
 
 changeList = []
-changeList.append(0)
-for i in range (0,len(moneyList)-1):
-    change = moneyList[i+1] - (moneyList[i])
+for i in range (0, len(moneyList)-1):
+    change = moneyList[i+1] - moneyList[i]
     changeList.append(change)
 print(changeList)
 
+len(changeList)
+
 changeListAv = round(sum(changeList)/len(changeList),2)
-print(changeListAv)
+changeListAv
 
-for i in range(0,len(changeList)):
+for i in range(len(changeList)):
     if (changeList[i] == max(changeList)):
-        maxchangedate = (dateList[i],max(changeList))
-greatestincrease = str(print("Greatest Increase in Profits: " + str(maxchangedate)))
+        maxchangedate = (dateList[i+1],max(changeList))
+greatestincrease = str("Greatest Increase in Profits: " + str(maxchangedate))
 
-for i in range(0,len(changeList)):
+for i in range(len(changeList)):
     if (changeList[i] == min(changeList)):
-        minchangedate = (dateList[i],min(changeList))
-greatestdecrease = str(print("Greatest Decrease in Profits: " + str(minchangedate)))
+        minchangedate = (dateList[i+1],min(changeList))
+greatestdecrease = str("Greatest Decrease in Profits: " + str(minchangedate))
 
 print(f"Financial Analysis\n"
      "______________________________ \n")
 print("Total Months: " + str(totalmonths))
-print("Total Net Profits & Losses: " + "$"+ str(nettotal))
+print("Total Net Profits & Losses: " + "$"+ str(nettotal)+".00")
 print("Average Change: " + "$"+ str(changeListAv))
+print(greatestincrease)
+print(greatestdecrease)
+
+with open("budget_data.txt","w", newline="") as txtfile:
+    print(f"Financial Analysis\n"
+     "______________________________ \n",file = txtfile)
+    print("Total Months: " + str(totalmonths),file = txtfile)
+    print("Total Net Profits & Losses: " + "$"+ str(nettotal) +".00",file = txtfile)
+    print("Average Change: " + "$"+ str(changeListAv),file = txtfile)
+    print(greatestincrease,file = txtfile)
+    print(greatestdecrease,file = txtfile)
+
