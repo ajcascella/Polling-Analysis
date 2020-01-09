@@ -1,6 +1,8 @@
-* In this project I wrote a Python script to automate a small town's vote-counting process.   
+## Background
 
-* The polling data is a csv file composed of three columns: `Voter ID`, `County`, and `Candidate`. 
+In this project I wrote a Python script to automate a small town's vote-counting process.  The polling data is a csv file composed of three columns: `Voter ID`, `County`, and `Candidate`. 
+
+## Step by Step
 
 * My Python script analyzes the votes and calculates the following:
 
